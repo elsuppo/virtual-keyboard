@@ -102,6 +102,7 @@ body {
   resize: none;
   border-radius: 10px;
   padding: 10px;
+  font: inherit;
 }
 
 .description {
