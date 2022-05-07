@@ -29,10 +29,6 @@ const config = {
   ],
   module: {
     rules: [
-      // {
-      //   test: /\.(js|jsx)$/i,
-      //   loader: 'babel-loader',
-      // },
       {
         test: /\.css$/i,
         use: [stylesHandler, 'css-loader'],
