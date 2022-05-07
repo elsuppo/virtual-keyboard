@@ -1,17 +1,24 @@
 import './styles/style.css';
 import createKeyboard from './js/createKeyboard';
 import desriptionInner from './js/descriptionInner';
-import capslock from './js/capslock';
+import isCapslock from './js/capslock';
 
 const body = document.querySelector('body');
 
 let lang = 'en';
+let caps = false;
 
 function getLocalStorage() {
-  if (localStorage.getItem('lang_suppo')) {
-    lang = localStorage.getItem('lang_suppo');
+  if (localStorage.getItem('lang')) {
+    lang = localStorage.getItem('lang');
   } else {
-    localStorage.setItem('lang_suppo', lang);
+    localStorage.setItem('lang', lang);
+  }
+
+  if (localStorage.getItem('caps')) {
+    caps = localStorage.getItem('caps');
+  } else {
+    localStorage.setItem('caps', caps);
   }
 }
 
@@ -37,35 +44,28 @@ container.appendChild(keyboard);
 
 // Create inner DOM-elements
 description.innerHTML = desriptionInner(lang);
-
 createKeyboard(keyboard, lang);
 
-// change lang
 document.addEventListener('keydown', (event) => {
   const button = keyboard.querySelector(`[data-code=${event.code}]`);
-  if (button) {
-    if ((event.altKey && event.shiftKey)
-    || (button.dataset.code === 'AltRight' && event.shiftKey)) {
-      if (localStorage.getItem('lang_suppo') === 'en') {
-        lang = 'ru';
-        localStorage.setItem('lang_suppo', lang);
-      } else {
-        lang = 'en';
-        localStorage.setItem('lang_suppo', lang);
-      }
-      createKeyboard(keyboard, lang);
-      description.innerHTML = desriptionInner(lang);
-    }
-  }
-});
 
-document.addEventListener('keydown', (event) => {
-  // event.preventDefault();
-  const button = keyboard.querySelector(`[data-code=${event.code}]`);
+  // сhange lang
+  if ((event.altKey && event.shiftKey)
+  || (button.dataset.code === 'AltRight' && event.shiftKey)) {
+    if (localStorage.getItem('lang') === 'en') {
+      lang = 'ru';
+      localStorage.setItem('lang', lang);
+    } else {
+      lang = 'en';
+      localStorage.setItem('lang', lang);
+    }
+    createKeyboard(keyboard, lang);
+    description.innerHTML = desriptionInner(lang);
+  }
 
   // capslock
   if (event.code === 'CapsLock') {
-    capslock(button);
+    isCapslock(button);
   }
 });
 
@@ -75,6 +75,6 @@ document.addEventListener('click', (event) => {
 
   // capslock
   if (button.classList.contains('button_capslock')) {
-    capslock(button);
+    isCapslock(button);
   }
 });

@@ -27,6 +27,24 @@ function createKeyboard(keyboard, lang) {
     });
     keyboard.append(keyboardRow);
   }
+
+  const capslockBtn = document.querySelector('.button_capslock');
+  if (localStorage.getItem('caps') === 'false') {
+    if (capslockBtn.classList.contains('active')) {
+      capslockBtn.classList.remove('active');
+    }
+    document.querySelectorAll('.button_text').forEach((el) => {
+      // eslint-disable-next-line no-param-reassign
+      el.innerHTML = el.innerHTML.toLowerCase();
+    });
+  } else {
+    document.querySelector('.button_capslock').classList.add('active');
+    document.querySelectorAll('.button_text').forEach((el) => {
+      // eslint-disable-next-line no-param-reassign
+      el.innerHTML = el.innerHTML.toUpperCase();
+    });
+  }
+
   return keyboard;
 }
 

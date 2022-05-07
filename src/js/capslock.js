@@ -14,4 +14,16 @@ function capslock(button) {
   }
 }
 
-export default capslock;
+function isCapslock(button) {
+  if (localStorage.getItem('caps') === 'false') {
+    const caps = true;
+    localStorage.setItem('caps', caps);
+    capslock(button);
+  } else {
+    const caps = false;
+    localStorage.setItem('caps', caps);
+    capslock(button);
+  }
+}
+
+export default isCapslock;
