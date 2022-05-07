@@ -46,35 +46,61 @@ container.appendChild(keyboard);
 description.innerHTML = desriptionInner(lang);
 createKeyboard(keyboard, lang);
 
+// ----KEYBOARD----
 document.addEventListener('keydown', (event) => {
+  const keyArr = [];
+  document.querySelectorAll('.button').forEach((el) => {
+    keyArr.push(el.dataset.code);
+  });
+
   const button = keyboard.querySelector(`[data-code=${event.code}]`);
 
   // сhange lang
-  if ((event.altKey && event.shiftKey)
-  || (button.dataset.code === 'AltRight' && event.shiftKey)) {
-    if (localStorage.getItem('lang') === 'en') {
-      lang = 'ru';
-      localStorage.setItem('lang', lang);
-    } else {
-      lang = 'en';
-      localStorage.setItem('lang', lang);
+  if (keyArr.includes(event.code)) {
+    if ((event.altKey && event.shiftKey)
+      || (button.dataset.code === 'AltRight' && event.shiftKey)) {
+      if (localStorage.getItem('lang') === 'en') {
+        lang = 'ru';
+        localStorage.setItem('lang', lang);
+      } else {
+        lang = 'en';
+        localStorage.setItem('lang', lang);
+      }
+      createKeyboard(keyboard, lang);
+      description.innerHTML = desriptionInner(lang);
     }
-    createKeyboard(keyboard, lang);
-    description.innerHTML = desriptionInner(lang);
   }
 
   // capslock
   if (event.code === 'CapsLock') {
     isCapslock(button);
   }
+
+  // animation
+  if (keyArr.includes(event.code) && event.code !== 'CapsLock') {
+    button.classList.add('active-animation');
+    setTimeout(() => button.classList.remove('active-animation'), 200);
+  }
 });
 
+// ----MOUSE----
 document.addEventListener('click', (event) => {
   // event.preventDefault();
-  const button = event.target;
+  let button;
+  if (event.target.classList.contains('button')) {
+    button = event.target;
+  } else {
+    return;
+  }
 
   // capslock
   if (button.classList.contains('button_capslock')) {
     isCapslock(button);
+  }
+
+  // animation
+  if (!button.classList.contains('button_capslock')) {
+    button.classList.add('active-animation');
+    setTimeout(() => button.classList.remove('active-animation'), 200);
   }
 });
