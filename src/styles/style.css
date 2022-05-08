@@ -96,22 +96,6 @@ body {
   border-radius: 10px;
 }
 
-.active-animation {
-  animation-duration: 0.2s;
-  animation-name: clickBtn;
-}
-
-@keyframes clickBtn {
-  from {
-    background: black;
-  }
-
-  to {
-    background: grey;
-    border-radius: 10px;
-  }
-}
-
 .textarea {
   margin: 20px 0;
   width: 795px;

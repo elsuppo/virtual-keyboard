@@ -47,12 +47,13 @@ description.innerHTML = desriptionInner(lang);
 createKeyboard(keyboard, lang);
 
 // ----KEYBOARD----
-document.addEventListener('keydown', (event) => {
-  const keyArr = [];
-  document.querySelectorAll('.button').forEach((el) => {
-    keyArr.push(el.dataset.code);
-  });
+const buttons = document.querySelectorAll('.button');
+const keyArr = [];
+buttons.forEach((el) => {
+  keyArr.push(el.dataset.code);
+});
 
+document.addEventListener('keydown', (event) => {
   const button = keyboard.querySelector(`[data-code=${event.code}]`);
 
   // сhange lang
@@ -78,14 +79,19 @@ document.addEventListener('keydown', (event) => {
 
   // animation
   if (keyArr.includes(event.code) && event.code !== 'CapsLock') {
-    button.classList.add('active-animation');
-    setTimeout(() => button.classList.remove('active-animation'), 200);
+    button.style.background = '#808080';
+  }
+});
+
+document.addEventListener('keyup', (event) => {
+  const button = keyboard.querySelector(`[data-code=${event.code}]`);
+  if (keyArr.includes(event.code) && event.code !== 'CapsLock') {
+    button.style.background = '#000000';
   }
 });
 
 // ----MOUSE----
 document.addEventListener('click', (event) => {
-  // event.preventDefault();
   let button;
   if (event.target.classList.contains('button')) {
     button = event.target;
@@ -97,10 +103,32 @@ document.addEventListener('click', (event) => {
   if (button.classList.contains('button_capslock')) {
     isCapslock(button);
   }
+});
+
+document.addEventListener('mousedown', (event) => {
+  let button;
+  if (event.target.classList.contains('button')) {
+    button = event.target;
+  } else {
+    return;
+  }
 
   // animation
   if (!button.classList.contains('button_capslock')) {
-    button.classList.add('active-animation');
-    setTimeout(() => button.classList.remove('active-animation'), 200);
+    button.style.background = '#808080';
+  }
+});
+
+document.addEventListener('mouseup', (event) => {
+  let button;
+  if (event.target.classList.contains('button')) {
+    button = event.target;
+  } else {
+    return;
+  }
+
+  // animation
+  if (!button.classList.contains('button_capslock')) {
+    button.style.background = '#000000';
   }
 });
