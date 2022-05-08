@@ -72,6 +72,19 @@ document.addEventListener('keydown', (event) => {
     }
   }
 
+  // shift
+  if (event.shiftKey) {
+    document.querySelectorAll('.button_text').forEach((el) => {
+      if (localStorage.getItem('caps') === 'false') {
+        // eslint-disable-next-line no-param-reassign
+        el.innerHTML = el.innerHTML.toUpperCase();
+      } else {
+        // eslint-disable-next-line no-param-reassign
+        el.innerHTML = el.innerHTML.toLowerCase();
+      }
+    });
+  }
+
   // capslock
   if (event.code === 'CapsLock') {
     isCapslock(button);
@@ -87,6 +100,19 @@ document.addEventListener('keyup', (event) => {
   const button = keyboard.querySelector(`[data-code=${event.code}]`);
   if (keyArr.includes(event.code) && event.code !== 'CapsLock') {
     button.style.background = '#000000';
+  }
+
+  // shift
+  if (event.key === 'Shift') {
+    document.querySelectorAll('.button_text').forEach((el) => {
+      if (localStorage.getItem('caps') === 'false') {
+        // eslint-disable-next-line no-param-reassign
+        el.innerHTML = el.innerHTML.toLowerCase();
+      } else {
+        // eslint-disable-next-line no-param-reassign
+        el.innerHTML = el.innerHTML.toUpperCase();
+      }
+    });
   }
 });
 
@@ -105,6 +131,7 @@ document.addEventListener('click', (event) => {
   }
 });
 
+// mouseDOWN
 document.addEventListener('mousedown', (event) => {
   let button;
   if (event.target.classList.contains('button')) {
@@ -113,12 +140,38 @@ document.addEventListener('mousedown', (event) => {
     return;
   }
 
+  // shift
+  if (button.classList.contains('button_leftshift')
+    || button.classList.contains('button_rightshift')) {
+    document.querySelectorAll('.button_text').forEach((el) => {
+      if (localStorage.getItem('caps') === 'false') {
+        // eslint-disable-next-line no-param-reassign
+        el.innerHTML = el.innerHTML.toUpperCase();
+      } else {
+        // eslint-disable-next-line no-param-reassign
+        el.innerHTML = el.innerHTML.toLowerCase();
+      }
+    });
+  }
+
+  // space
+  if (button.classList.contains('button_space')) {
+    textarea.value += ' ';
+  }
+
   // animation
   if (!button.classList.contains('button_capslock')) {
     button.style.background = '#808080';
   }
+
+  // textarea
+  if (button.classList.contains('button_text')
+  || button.classList.contains('button_digit')) {
+    textarea.value += button.innerHTML;
+  }
 });
 
+// mouseUP
 document.addEventListener('mouseup', (event) => {
   let button;
   if (event.target.classList.contains('button')) {
@@ -127,8 +180,27 @@ document.addEventListener('mouseup', (event) => {
     return;
   }
 
+  // shift
+  if (button.classList.contains('button_leftshift')
+    || button.classList.contains('button_rightshift')) {
+    document.querySelectorAll('.button_text').forEach((el) => {
+      if (localStorage.getItem('caps') === 'false') {
+        // eslint-disable-next-line no-param-reassign
+        el.innerHTML = el.innerHTML.toLowerCase();
+      } else {
+        // eslint-disable-next-line no-param-reassign
+        el.innerHTML = el.innerHTML.toUpperCase();
+      }
+    });
+  }
+
   // animation
   if (!button.classList.contains('button_capslock')) {
     button.style.background = '#000000';
   }
+});
+
+// textarea
+textarea.addEventListener('blur', (e) => {
+  e.target.focus();
 });
