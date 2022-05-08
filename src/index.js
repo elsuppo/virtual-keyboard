@@ -2,6 +2,8 @@ import './styles/style.css';
 import createKeyboard from './js/createKeyboard';
 import desriptionInner from './js/descriptionInner';
 import isCapslock from './js/capslock';
+import shiftDown from './js/shiftDown';
+import shiftUp from './js/shiftUp';
 
 const body = document.querySelector('body');
 
@@ -74,15 +76,7 @@ document.addEventListener('keydown', (event) => {
 
   // shift
   if (event.shiftKey) {
-    document.querySelectorAll('.button_text').forEach((el) => {
-      if (localStorage.getItem('caps') === 'false') {
-        // eslint-disable-next-line no-param-reassign
-        el.innerHTML = el.innerHTML.toUpperCase();
-      } else {
-        // eslint-disable-next-line no-param-reassign
-        el.innerHTML = el.innerHTML.toLowerCase();
-      }
-    });
+    shiftDown();
   }
 
   // capslock
@@ -104,15 +98,7 @@ document.addEventListener('keyup', (event) => {
 
   // shift
   if (event.key === 'Shift') {
-    document.querySelectorAll('.button_text').forEach((el) => {
-      if (localStorage.getItem('caps') === 'false') {
-        // eslint-disable-next-line no-param-reassign
-        el.innerHTML = el.innerHTML.toLowerCase();
-      } else {
-        // eslint-disable-next-line no-param-reassign
-        el.innerHTML = el.innerHTML.toUpperCase();
-      }
-    });
+    shiftUp();
   }
 });
 
@@ -143,15 +129,7 @@ document.addEventListener('mousedown', (event) => {
   // shift
   if (button.classList.contains('button_leftshift')
     || button.classList.contains('button_rightshift')) {
-    document.querySelectorAll('.button_text').forEach((el) => {
-      if (localStorage.getItem('caps') === 'false') {
-        // eslint-disable-next-line no-param-reassign
-        el.innerHTML = el.innerHTML.toUpperCase();
-      } else {
-        // eslint-disable-next-line no-param-reassign
-        el.innerHTML = el.innerHTML.toLowerCase();
-      }
-    });
+    shiftDown();
   }
 
   // space
@@ -183,15 +161,7 @@ document.addEventListener('mouseup', (event) => {
   // shift
   if (button.classList.contains('button_leftshift')
     || button.classList.contains('button_rightshift')) {
-    document.querySelectorAll('.button_text').forEach((el) => {
-      if (localStorage.getItem('caps') === 'false') {
-        // eslint-disable-next-line no-param-reassign
-        el.innerHTML = el.innerHTML.toLowerCase();
-      } else {
-        // eslint-disable-next-line no-param-reassign
-        el.innerHTML = el.innerHTML.toUpperCase();
-      }
-    });
+    shiftUp();
   }
 
   // animation
