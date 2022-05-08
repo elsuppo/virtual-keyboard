@@ -1,0 +1,124 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: azure;
+  font-size: 16px;
+  font-family: 'Inter', sans-serif;
+  font-weight: 400;
+}
+
+.container {
+  margin: 0 auto;
+  width: 795px;
+}
+
+.keyboard {
+  margin-top: 20px;
+  width: 795px;
+  height: 265px;
+  background: silver;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  gap: 5px;
+  align-items: center;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+.keyboard-row {
+  display: flex;
+  gap: 5px;
+}
+
+.button {
+  background: black;
+  color: white;
+  width: 45px;
+  height: 45px;
+  padding: 5px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 5px;
+}
+
+.button_tab {
+  width: 75px;
+  font-weight: 700;
+}
+
+.button_capslock {
+  width: 100px;
+  font-weight: 700;
+}
+
+.button_backspace {
+  width: 125px;
+  font-weight: 700;
+}
+
+.button_leftshift,
+.button_rightshift {
+  width: 110px;
+  font-weight: 700;
+}
+
+.button_enter {
+  width: 120px;
+  font-weight: 700;
+}
+
+.button_space {
+  width: 360px;
+}
+
+.button_rightctrl {
+  width: 60px;
+  font-weight: 700;
+}
+
+.button_leftctrl,
+.button_del,
+.button_rightalt,
+.button_leftalt,
+.button_win {
+  font-weight: 700;
+}
+
+.active {
+  background: grey;
+  border-radius: 10px;
+}
+
+.textarea {
+  margin: 20px 0;
+  width: 795px;
+  height: 200px;
+  resize: none;
+  border-radius: 10px;
+  padding: 10px;
+  font: inherit;
+}
+
+.description {
+  width: 795px;
+  height: 70px;
+  margin-top: auto;
+  background: black;
+  color: white;
+  border-radius: 10px;
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.description span {
+  font-weight: 700;
+  font-size: 20px;
+}
